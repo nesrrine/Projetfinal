@@ -62,8 +62,8 @@ public class UserManagementController {
 
             Text userInfo = new Text(
                     user.getFirstName() + " " + user.getLastName() + " | " +
-                    user.getEmail() + " | " +
-                    user.getRole()
+                            user.getEmail() + " | " +
+                            user.getRole()
             );
             userInfo.setStyle("-fx-fill: #333333; -fx-font-size: 14px;");
 

@@ -62,14 +62,14 @@ public class SignupController {
 
         // Créer l'utilisateur
         User user = new User(
-            firstNameField.getText().trim(),
-            lastNameField.getText().trim(),
-            emailField.getText().trim(),
-            passwordField.getText().trim(),
-            addressField.getText().trim(),
-            phoneNumber,
-            birthDatePicker.getValue(),
-            roleComboBox.getValue()
+                firstNameField.getText().trim(),
+                lastNameField.getText().trim(),
+                emailField.getText().trim(),
+                passwordField.getText().trim(),
+                addressField.getText().trim(),
+                phoneNumber,
+                birthDatePicker.getValue(),
+                roleComboBox.getValue()
         );
 
         // Inscrire l'utilisateur
@@ -78,9 +78,9 @@ public class SignupController {
         // Envoyer un email de bienvenue
         EmailService emailService = new EmailService();
         boolean emailSent = emailService.sendWelcomeEmail(
-            user.getEmail(),
-            user.getFirstName(),
-            user.getLastName()
+                user.getEmail(),
+                user.getFirstName(),
+                user.getLastName()
         );
 
         if (emailSent) {
@@ -179,8 +179,8 @@ public class SignupController {
 
         // Accepter les formats: 12345678, +21612345678, 00216123456789
         return phone.matches("\\d{8}") || // Format tunisien standard
-               phone.matches("\\+216\\d{8}") || // Format international avec +
-               phone.matches("00216\\d{8}"); // Format international avec 00
+                phone.matches("\\+216\\d{8}") || // Format international avec +
+                phone.matches("00216\\d{8}"); // Format international avec 00
     }
 
     @FXML

@@ -84,7 +84,7 @@ public class UserService {
                     boolean isActive = (activeValue == 1);
 
                     System.out.println("Login attempt for email: " + email + " - Password match: " + match +
-                                     " - User active: " + isActive + " (value: " + activeValue + ")");
+                            " - User active: " + isActive + " (value: " + activeValue + ")");
 
                     // Si l'utilisateur est inactif, on refuse l'accès
                     if (!isActive) {
@@ -109,7 +109,7 @@ public class UserService {
                     }
 
                     System.out.println("Login attempt for email: " + email + " - Password match: " + match +
-                                     " - User considered active (column not yet created)");
+                            " - User considered active (column not yet created)");
                 }
 
                 // Si on arrive ici, c'est que l'authentification est réussie
@@ -154,15 +154,15 @@ public class UserService {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 User user = new User(
-                    rs.getInt("id"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("address"),
-                    rs.getString("phone"),
-                    rs.getDate("birth_date").toLocalDate(),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
                 );
 
                 // Définir le statut actif par défaut à true
@@ -226,15 +226,15 @@ public class UserService {
         try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
                 User user = new User(
-                    rs.getInt("id"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("email"),
-                    "********", // Hide password
-                    rs.getString("address"),
-                    rs.getString("phone"),
-                    rs.getDate("birth_date").toLocalDate(),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        "********", // Hide password
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
                 );
 
                 // Définir le statut actif par défaut à true
@@ -282,15 +282,15 @@ public class UserService {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 User user = new User(
-                    rs.getInt("id"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("address"),
-                    rs.getString("phone"),
-                    rs.getDate("birth_date").toLocalDate(),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
                 );
 
                 // Définir le statut actif par défaut à true
@@ -361,15 +361,15 @@ public class UserService {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 User user = new User(
-                    rs.getInt("id"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("email"),
-                    "********", // Masquer le mot de passe
-                    rs.getString("address"),
-                    rs.getString("phone"),
-                    rs.getDate("birth_date").toLocalDate(),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        "********", // Masquer le mot de passe
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
                 );
 
                 // Définir le statut actif par défaut à true
@@ -737,15 +737,15 @@ public class UserService {
         try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
                 User user = new User(
-                    rs.getInt("id"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("email"),
-                    "********", // Masquer le mot de passe
-                    rs.getString("address"),
-                    rs.getString("phone"),
-                    rs.getDate("birth_date").toLocalDate(),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        "********", // Masquer le mot de passe
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
                 );
 
                 // Définir le statut actif à true (tous les utilisateurs retournés sont actifs)
@@ -795,15 +795,15 @@ public class UserService {
         try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
                 User user = new User(
-                    rs.getInt("id"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("email"),
-                    "********", // Masquer le mot de passe
-                    rs.getString("address"),
-                    rs.getString("phone"),
-                    rs.getDate("birth_date").toLocalDate(),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        "********", // Masquer le mot de passe
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
                 );
 
                 // Définir le statut actif à false
@@ -818,4 +818,32 @@ public class UserService {
 
         return users;
     }
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM users";
+
+        try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                User user = new User(
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        "********", // Hide password
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
+                );
+                users.add(user);
+            }
+            System.out.println("Retrieved " + users.size() + " users"); // Debug log
+        } catch (SQLException e) {
+            System.err.println("Error fetching users: " + e.getMessage());
+            e.printStackTrace(); // Debug log
+        }
+
+        return users;
+    }
+
 }

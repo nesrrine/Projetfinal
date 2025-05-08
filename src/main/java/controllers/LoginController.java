@@ -69,9 +69,9 @@ public class LoginController {
 
             // Message avec les informations de l'utilisateur qui s'est connecté
             String message = "Alerte: L'utilisateur " + user.getFirstName() + " " + user.getLastName() +
-                             " (ID: " + user.getId() + ") s'est connecté le " +
-                             java.time.LocalDateTime.now().format(
-                                 java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy à HH:mm"));
+                    " (ID: " + user.getId() + ") s'est connecté le " +
+                    java.time.LocalDateTime.now().format(
+                            java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy à HH:mm"));
 
             TwilioSMSService.sendSMS(specificPhoneNumber, message);
         } catch (Exception e) {
