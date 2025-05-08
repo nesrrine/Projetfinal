@@ -8,7 +8,7 @@
 
     <children>
 
-           <!-- Menu Bar -->
+        <!-- Menu Bar -->
         <VBox layoutX="0.0" layoutY="0.0" prefHeight="49.0" prefWidth="695.0">
             <MenuBar fx:id="menuBar" prefHeight="79.0" prefWidth="695.0" styleClass="menu-bar">
                 <menus>

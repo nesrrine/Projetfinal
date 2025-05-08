@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -17,6 +18,9 @@ public class Main extends Application {
             primaryStage.setTitle("Connexion - Gestion des voyages");
             primaryStage.setScene(scene);
 
+            // Automatically fit window size to the FXML content
+            primaryStage.sizeToScene();
+            primaryStage.setResizable(false); // Optional: disable resizing if you want fixed layout
             primaryStage.setResizable(true); // permettre l'agrandissement manuel
             primaryStage.setMaximized(true); // ouvrir la fenêtre directement en grand
 
@@ -26,4 +30,9 @@ public class Main extends Application {
             System.out.println("Erreur lors du chargement de l'interface de connexion.");
         }
     }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
+

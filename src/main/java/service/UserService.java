@@ -58,15 +58,15 @@ public class UserService {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 User user = new User(
-                    rs.getInt("id"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("address"),
-                    rs.getString("phone"),
-                    rs.getDate("birth_date").toLocalDate(),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
                 );
                 System.out.println("Found user by email: " + email + ", ID: " + user.getId()); // Debug log
                 return user;
@@ -117,15 +117,15 @@ public class UserService {
         try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
                 User user = new User(
-                    rs.getInt("id"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("email"),
-                    "********", // Hide password
-                    rs.getString("address"),
-                    rs.getString("phone"),
-                    rs.getDate("birth_date").toLocalDate(),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        "********", // Hide password
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
                 );
                 users.add(user);
             }
@@ -145,15 +145,15 @@ public class UserService {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 User user = new User(
-                    rs.getInt("id"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("address"),
-                    rs.getString("phone"),
-                    rs.getDate("birth_date").toLocalDate(),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
                 );
                 System.out.println("Found user by ID: " + id); // Debug log
                 return user;
