@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
+
     private final Connection con;
 
     public UserService() {
@@ -37,23 +38,19 @@ public class UserService {
     }
 
     public boolean login(String email, String password) {
-        String sql = "SELECT password FROM users WHERE email = ?";
+        String sql = "SELECT * FROM users WHERE email = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String hashedPassword = rs.getString("password");
-                boolean match = BCrypt.checkpw(password, hashedPassword);
-                System.out.println("Login attempt for email: " + email + ", password match: " + match); // Debug log
-                return match;
+                return BCrypt.checkpw(password, hashedPassword);
             }
         } catch (SQLException e) {
-            System.err.println("Error logging in user: " + e.getMessage());
-            e.printStackTrace(); // Debug log
+            e.printStackTrace();
         }
         return false;
     }
-
     public User getByEmail(String email) {
         String sql = "SELECT * FROM users WHERE email = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -61,15 +58,15 @@ public class UserService {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 User user = new User(
-                    rs.getInt("id"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("address"),
-                    rs.getString("phone"),
-                    rs.getDate("birth_date").toLocalDate(),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
                 );
                 System.out.println("Found user by email: " + email + ", ID: " + user.getId()); // Debug log
                 return user;
@@ -120,15 +117,15 @@ public class UserService {
         try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
                 User user = new User(
-                    rs.getInt("id"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("email"),
-                    "********", // Hide password
-                    rs.getString("address"),
-                    rs.getString("phone"),
-                    rs.getDate("birth_date").toLocalDate(),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        "********", // Hide password
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
                 );
                 users.add(user);
             }
@@ -148,15 +145,15 @@ public class UserService {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 User user = new User(
-                    rs.getInt("id"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("address"),
-                    rs.getString("phone"),
-                    rs.getDate("birth_date").toLocalDate(),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
                 );
                 System.out.println("Found user by ID: " + id); // Debug log
                 return user;
@@ -168,4 +165,61 @@ public class UserService {
         System.out.println("No user found for ID: " + id); // Debug log
         return null;
     }
+    private int countReclamationsRecues(int userId) {
+        String sql = "SELECT COUNT(*) FROM reclamation WHERE cible_id = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors du comptage des réclamations reçues : " + e.getMessage());
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM users";
+
+        try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                User user = new User(
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        "********", // Hide password
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getDate("birth_date").toLocalDate(),
+                        rs.getString("role")
+                );
+                users.add(user);
+            }
+            System.out.println("Retrieved " + users.size() + " users"); // Debug log
+        } catch (SQLException e) {
+            System.err.println("Error fetching users: " + e.getMessage());
+            e.printStackTrace(); // Debug log
+        }
+
+        return users;
+    }
+    private List<String> getUsersList() {
+        List<String> users = new ArrayList<>();
+        try {
+            // Appel de la méthode getAllUsers pour obtenir tous les utilisateurs
+            List<User> userList = new UserService().getAllUsers();
+            for (User user : userList) {
+                users.add(user.getEmail());  // Ajout de l'email de chaque utilisateur dans la liste
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur lors de la récupération des utilisateurs : " + e.getMessage());
+        }
+        return users;
+    }
+
+
+
 }

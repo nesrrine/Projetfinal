@@ -65,7 +65,7 @@ public class CreateRestaurantController {
         imageField.textProperty().addListener((observable, oldValue, newValue) -> validateAndStyle());
         image1Field.textProperty().addListener((observable, oldValue, newValue) -> validateAndStyle());
         image2Field.textProperty().addListener((observable, oldValue, newValue) -> validateAndStyle());
-        
+
         // Add listeners for latitude and longitude fields
         latField.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
@@ -77,7 +77,7 @@ public class CreateRestaurantController {
                 // Ignore invalid input
             }
         });
-        
+
         lngField.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 if (!newValue.isEmpty()) {
@@ -88,13 +88,13 @@ public class CreateRestaurantController {
                 // Ignore invalid input
             }
         });
-        
+
         // Set up cancel button
         cancelButton.setOnAction(event -> {
             Stage stage = (Stage) cancelButton.getScene().getWindow();
             stage.close();
         });
-        
+
         // Initialize fields if editing an existing restaurant
         if (restaurantToEdit != null) {
             latitude = restaurantToEdit.getLat();
@@ -120,19 +120,19 @@ public class CreateRestaurantController {
         chooseImage2Button.setVisible(false);
         selectLocationButton.setVisible(false);
     }
-    
+
     @FXML
     private void handleSelectLocation() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/MapView.fxml"));
             Parent root = loader.load();
-            
+
             MapController mapController = loader.getController();
-            
+
             // Get current coordinates if available
             double initialLat = 0;
             double initialLng = 0;
-            
+
             if (!latField.getText().isEmpty() && !lngField.getText().isEmpty()) {
                 try {
                     initialLat = Double.parseDouble(latField.getText());
@@ -142,32 +142,32 @@ public class CreateRestaurantController {
                     System.err.println("Error parsing coordinates: " + e.getMessage());
                 }
             }
-            
+
             System.out.println("Opening map with initial coordinates: " + initialLat + ", " + initialLng);
-            
+
             // Create a new stage for the map
             Stage stage = new Stage();
             stage.setTitle("Sélectionner l'emplacement du restaurant");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
-            
+
             // Set up callback to receive selected location
             mapController.loadLocationPicker(initialLat, initialLng, (lat, lng) -> {
                 System.out.println("Location callback received: " + lat + ", " + lng);
-                
+
                 // Update the latitude and longitude fields directly
                 latitude = lat;
                 longitude = lng;
                 latField.setText(String.format("%.6f", lat));
                 lngField.setText(String.format("%.6f", lng));
                 validateAndStyle();
-                
+
                 System.out.println("Updated latitude/longitude fields: " + latField.getText() + ", " + lngField.getText());
             });
-            
+
             // Show the map and wait for it to close
             stage.showAndWait();
-            
+
         } catch (IOException e) {
             showError("Erreur lors de l'ouverture de la carte", "Erreur lors de l'ouverture de la carte: " + e.getMessage());
         }
@@ -228,7 +228,7 @@ public class CreateRestaurantController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Sélectionner " + title);
         fileChooser.getExtensionFilters().add(
-            new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
         );
         return fileChooser.showOpenDialog(chooseImageButton.getScene().getWindow());
     }
@@ -270,7 +270,7 @@ public class CreateRestaurantController {
             String image1 = image1Field.getText().trim();
             String image2 = image2Field.getText().trim();
             boolean promotion = promotionCheckBox.isSelected();
-            
+
             Restaurant restaurant;
             if (restaurantToEdit == null) {
                 restaurant = new Restaurant(nom, localisation, image, description, prix, latitude, longitude, image1, image2, currentUser.getId(), promotion);
@@ -287,11 +287,11 @@ public class CreateRestaurantController {
                 restaurant.setImage2(image2);
                 restaurant.setPromotion(promotion);
             }
-            
+
             if (restaurantToEdit == null) {
                 restaurantService.addRestaurant(restaurant);
                 showSuccess("Restaurant créé avec succès!");
-                
+
                 // Fermer la fenêtre actuelle
                 Stage currentStage = (Stage) nomField.getScene().getWindow();
                 currentStage.close();
@@ -303,12 +303,12 @@ public class CreateRestaurantController {
                     Stage stage = new Stage();
                     stage.setTitle("Interface Utilisateur");
                     stage.setScene(scene);
-                    
+
                     // Récupérer le contrôleur et naviguer vers la section des restaurants
                     UserInterfaceController controller = loader.getController();
                     controller.initialize();
                     controller.handleAllRestaurants();
-                    
+
                     stage.show();
                 } catch (IOException e) {
                     showError("Erreur", "Erreur lors de l'ouverture de l'interface utilisateur: " + e.getMessage());
@@ -316,7 +316,7 @@ public class CreateRestaurantController {
             } else {
                 restaurantService.updateRestaurant(restaurant);
                 showSuccess("Restaurant modifié avec succès!");
-                
+
                 // Fermer la fenêtre actuelle
                 Stage currentStage = (Stage) nomField.getScene().getWindow();
                 currentStage.close();
@@ -330,23 +330,23 @@ public class CreateRestaurantController {
 
     private List<String> validateFields() {
         List<String> errors = new ArrayList<>();
-        
+
         if (nomField.getText().trim().length() < 3) {
             errors.add("Le nom doit contenir au moins 3 caractères.");
         }
-        
+
         if (localisationField.getText().trim().length() < 5) {
             errors.add("La localisation doit contenir au moins 5 caractères.");
         }
-        
+
         if (descriptionField.getText().trim().length() < 10) {
             errors.add("La description doit contenir au moins 10 caractères.");
         }
-        
+
         if (imageField.getText().trim().isEmpty()) {
             errors.add("L'image principale est obligatoire.");
         }
-        
+
         try {
             double prix = Double.parseDouble(prixField.getText().trim());
             if (prix <= 0) {
@@ -355,11 +355,11 @@ public class CreateRestaurantController {
         } catch (NumberFormatException e) {
             errors.add("Le prix doit être un nombre valide.");
         }
-        
+
         if (latitude == 0 && longitude == 0) {
             errors.add("Veuillez sélectionner l'emplacement du restaurant sur la carte.");
         }
-        
+
         return errors;
     }
 
@@ -370,11 +370,11 @@ public class CreateRestaurantController {
 
     public void setRestaurantToEdit(Restaurant restaurant) {
         this.restaurantToEdit = restaurant;
-        
+
         if (restaurant != null) {
             titleLabel.setText("Modifier un Restaurant");
             submitButton.setText("Mettre à jour");
-            
+
             nomField.setText(restaurant.getNom());
             localisationField.setText(restaurant.getLocalisation());
             imageField.setText(restaurant.getImage());

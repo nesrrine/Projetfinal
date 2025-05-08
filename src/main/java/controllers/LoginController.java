@@ -6,7 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.User;
+import service.ReclamationService;
 import service.UserService;
+import utils.MyDatabase;
 import utils.Session;
 
 import java.io.IOException;
@@ -29,10 +31,23 @@ public class LoginController {
         }
 
         User user = userService.getByEmail(email);
-        if (user != null && userService.login(email, password)) {
-            System.out.println("Login successful for user ID: " + user.getId()); // Debug log
+        if (user == null) {
+            showAlert(Alert.AlertType.ERROR, "Aucun utilisateur trouvé avec cet email.");
+            return;
+        }
+
+        // Vérifie si l'utilisateur a atteint le seuil de réclamations
+        ReclamationService reclamationService = new ReclamationService(MyDatabase.getInstance().getCon());
+        int reclamationCount = reclamationService.countReclamationsRecues(user.getId());
+        if (reclamationCount >= 5) {
+            showAlert(Alert.AlertType.ERROR, "Connexion refusée : votre compte a reçu 5 réclamations ou plus.");
+            return;
+        }
+
+        // Authentification
+        boolean isLoginSuccessful = userService.login(email, password);
+        if (isLoginSuccessful) {
             Session.setCurrentUser(user);
-            System.out.println("Session user ID after set: " + Session.getCurrentUser().getId()); // Debug log
             showAlert(Alert.AlertType.INFORMATION, "Connexion réussie !");
             loadRoleUI(user.getRole());
         } else {

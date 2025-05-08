@@ -21,6 +21,8 @@ public class Main extends Application {
             // Automatically fit window size to the FXML content
             primaryStage.sizeToScene();
             primaryStage.setResizable(false); // Optional: disable resizing if you want fixed layout
+            primaryStage.setResizable(true); // permettre l'agrandissement manuel
+            primaryStage.setMaximized(true); // ouvrir la fenêtre directement en grand
 
             primaryStage.show();
         } catch (Exception e) {
@@ -33,3 +35,4 @@ public class Main extends Application {
         launch(args);
     }
 }
+

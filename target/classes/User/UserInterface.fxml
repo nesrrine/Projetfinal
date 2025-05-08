@@ -8,40 +8,54 @@
 
     <children>
 
-           <!-- Menu Bar -->
+        <!-- Menu Bar -->
         <VBox layoutX="0.0" layoutY="0.0" prefHeight="49.0" prefWidth="695.0">
             <MenuBar fx:id="menuBar" prefHeight="79.0" prefWidth="695.0" styleClass="menu-bar">
                 <menus>
                     <Menu text="Vlogs">
                         <items>
                             <MenuItem onAction="#handleAllVlogs" text="Tous les vlogs" />
-                            <MenuItem onAction="#handleMyVlogs" text="Mes vlogs" />
-                            <MenuItem onAction="#handleCreateVlog" text="Créer un vlog" />
+                            <MenuItem fx:id="myVlogsMenuItem" onAction="#handleMyVlogs" text="Mes vlogs" />
+                            <MenuItem fx:id="createVlogMenuItem" onAction="#handleCreateVlog" text="Créer un vlog" />
                         </items>
                     </Menu>
+
                     <Menu text="Transports">
                         <items>
                             <MenuItem onAction="#handleAllTransports" text="Tous les transports" />
-                            <MenuItem onAction="#handleMyTransports" text="Mes transports" />
-                            <MenuItem onAction="#handleCreateTransport" text="Créer un transport" />
+                            <MenuItem  fx:id="myTransportsMenuItem"  onAction="#handleMyTransports"  text="Mes transports" />
+                            <MenuItem fx:id="createTransportsMenuItem"  onAction="#handleCreateTransport" text="Créer un transport" />
                         </items>
                     </Menu>
                     <Menu text="Restaurants">
                         <items>
                             <MenuItem onAction="#handleAllRestaurants" text="Tous les restaurants" />
-                            <MenuItem onAction="#handleMyRestaurants" text="Mes restaurants" />
-                            <MenuItem onAction="#handleCreateRestaurant" text="Créer un restaurant" />
+                            <MenuItem fx:id="myRestaurantMenuItem"  onAction="#handleMyRestaurants" text="Mes restaurants" />
+                            <MenuItem  fx:id="createRestaurantMenuItem"  onAction="#handleCreateRestaurant" text="Créer un restaurant" />
                         </items>
                     </Menu>
                     <Menu text="Réclamations">
                         <items>
                             <MenuItem onAction="#handleMyReclamations" text="Mes réclamations" />
                             <MenuItem onAction="#handleCreateReclamation" text="Créer une réclamation" />
+                            <MenuItem onAction="#handleMyReclamationsrecus" text="réclamation recus" />
+
                         </items>
                     </Menu>
+
+                    <Menu text="Logements">
+                        <items>
+                            <MenuItem fx:id="createLogementMenuItem" onAction="#handleMylogements"  text="Créer un logement" />
+                            <MenuItem fx:id="LogementMenuItem" onAction="#handlelistLogment"  text="Mes Logements"  />
+                            <MenuItem onAction="#handleAllLogement"  text="Tous les  Logements"  />
+
+                        </items>
+                    </Menu>
+
                 </menus>
             </MenuBar>
         </VBox>
+
 
         <!-- Top bar with profile icon -->
         <HBox alignment="CENTER_RIGHT" layoutX="695.0" layoutY="5.0" prefHeight="42.0" prefWidth="320.0" style="-fx-background-color: white;">
