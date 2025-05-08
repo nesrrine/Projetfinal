@@ -11,7 +11,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/reservation.fxml"));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
@@ -21,6 +22,10 @@ public class Main extends Application {
             // Automatically fit window size to the FXML content
             primaryStage.sizeToScene();
             primaryStage.setResizable(false); // Optional: disable resizing if you want fixed layout
+
+            primaryStage.setResizable(true); // permettre l'agrandissement manuel
+            primaryStage.setMaximized(true); // ouvrir la fenêtre directement en grand
+
 
             primaryStage.show();
         } catch (Exception e) {
@@ -33,3 +38,4 @@ public class Main extends Application {
         launch(args);
     }
 }
+

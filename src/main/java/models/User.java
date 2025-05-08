@@ -13,6 +13,8 @@ public class User {
     private LocalDate birthDate;
     private String role;
 
+    private boolean active;
+
     public User() {}
 
     public User(int id, String firstName, String lastName, String email, String password,
@@ -26,6 +28,22 @@ public class User {
         this.phone = phone;
         this.birthDate = birthDate;
         this.role = role;
+
+        this.active = true; // Par défaut, un utilisateur est actif
+    }
+
+    public User(int id, String firstName, String lastName, String email, String password,
+                String address, String phone, LocalDate birthDate, String role, boolean active) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.phone = phone;
+        this.birthDate = birthDate;
+        this.role = role;
+        this.active = active;
     }
 
     public User(String firstName, String lastName, String email, String password,
@@ -37,7 +55,8 @@ public class User {
         this.address = address;
         this.phone = phone;
         this.birthDate = birthDate;
-        this.role = role;
+
+        this.active = true; // Par défaut, un utilisateur est actif
     }
 
     // Getters and setters...
@@ -114,6 +133,15 @@ public class User {
         this.role = role;
     }
 
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -126,6 +154,7 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", birthDate=" + birthDate +
                 ", role='" + role + '\'' +
+                ", active=" + active +
                 '}';
     }
 }

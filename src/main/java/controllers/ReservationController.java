@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import models.Reservation;
 import service.EmailService;
 import service.ReservationService;
+import service.emailserviceons;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -101,12 +102,12 @@ public class ReservationController {
         reservationService.add(r);
 
         // Envoyer un email de confirmation
-        EmailService emailService = new EmailService();
+        emailserviceons emailServiceons  = new emailserviceons ();
 
         // Adresse email du destinataire (vous pouvez la récupérer depuis un champ TextField si besoin)
         String toEmail = "onsrebai00@gmail.com"; // À adapter ou rendre dynamique
 
-        emailService.envoyerEmail(
+        emailServiceons.envoyerEmail(
                 toEmail,
                 "Confirmation de votre réservation",
                 r.getTitre(),

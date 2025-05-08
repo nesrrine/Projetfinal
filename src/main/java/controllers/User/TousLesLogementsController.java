@@ -88,6 +88,7 @@ public class TousLesLogementsController {
 
             return matchTexte && matchPrix;
         });
+        tableLogement.setItems(logements);
     }
 
     private void openReservationWindow() {
