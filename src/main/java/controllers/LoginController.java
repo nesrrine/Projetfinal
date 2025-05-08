@@ -6,9 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.User;
+<<<<<<< HEAD
+import service.UserService;
+=======
 import service.ReclamationService;
 import service.UserService;
 import utils.MyDatabase;
+>>>>>>> gestionnes
 import utils.Session;
 
 import java.io.IOException;
@@ -31,6 +35,12 @@ public class LoginController {
         }
 
         User user = userService.getByEmail(email);
+<<<<<<< HEAD
+        if (user != null && userService.login(email, password)) {
+            System.out.println("Login successful for user ID: " + user.getId()); // Debug log
+            Session.setCurrentUser(user);
+            System.out.println("Session user ID after set: " + Session.getCurrentUser().getId()); // Debug log
+=======
         if (user == null) {
             showAlert(Alert.AlertType.ERROR, "Aucun utilisateur trouvé avec cet email.");
             return;
@@ -48,6 +58,7 @@ public class LoginController {
         boolean isLoginSuccessful = userService.login(email, password);
         if (isLoginSuccessful) {
             Session.setCurrentUser(user);
+>>>>>>> gestionnes
             showAlert(Alert.AlertType.INFORMATION, "Connexion réussie !");
             loadRoleUI(user.getRole());
         } else {
