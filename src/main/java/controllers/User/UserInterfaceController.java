@@ -88,7 +88,7 @@ public class UserInterfaceController {
     }
     private boolean isHote() {
         User currentUser = Session.getCurrentUser();
-        return currentUser != null && "Hote".equals(currentUser.getRole());
+        return currentUser != null && "Hôte".equals(currentUser.getRole());
     }
     @FXML
     private void handleLogout() {
