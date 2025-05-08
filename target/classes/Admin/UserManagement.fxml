@@ -18,6 +18,16 @@
                 </font>
             </Label>
 
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+
+                <Button fx:id="statsButton" text="Statistiques des rôles"
+                        onAction="#handleShowRoleStats"
+                        style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold;" />
+                <Button fx:id="searchButton" text="Rechercher des utilisateurs"
+                        onAction="#handleOpenSearch"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;" />
+            </HBox>
+
             <ListView fx:id="userListView" prefHeight="450" prefWidth="680">
                 <stylesheets>
                     <URL value="@/styles/style.css" />

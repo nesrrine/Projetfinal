@@ -198,6 +198,10 @@
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 1);
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4be585f0932d5a9845b20a3250ea59eb21ad6ce
 .card {
     -fx-background-color: white;
     -fx-border-radius: 10;

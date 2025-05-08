@@ -10,7 +10,9 @@
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="21" project-jdk-type="JavaSDK" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_18" project-jdk-name="23" project-jdk-type="JavaSDK" />
->>>>>>> 79037d9fc0d54e263c5759ca95c110f8c0eada3a
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" project-jdk-name="23" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="21" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" project-jdk-name="23" project-jdk-type="JavaSDK" />
   <component name="ProjectType">
     <option name="id" value="jpab" />
   </component>

@@ -18,6 +18,7 @@ public class AdminDashboard {
     @FXML private Button gestionVlogButton;
     @FXML private Button gestionTransportButton;
     @FXML private Button gestionRestaurantButton;
+    @FXML private Button loginHistoryButton;
     @FXML private Button logoutButton;
     @FXML private ImageView profileIcon;
     @FXML private StackPane contentArea;
@@ -47,6 +48,7 @@ public class AdminDashboard {
         gestionVlogButton.setStyle(defaultStyle);
         gestionTransportButton.setStyle(defaultStyle);
         gestionRestaurantButton.setStyle(defaultStyle);
+        loginHistoryButton.setStyle(defaultStyle);
 
         if (currentActiveButton != null) {
             currentActiveButton.setStyle(activeStyle);
@@ -147,6 +149,22 @@ public class AdminDashboard {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Erreur lors du chargement de la gestion des restaurants.");
+        }
+    }
+
+
+    @FXML
+    private void handleLoginHistory() {
+        currentActiveButton = loginHistoryButton;
+        updateButtonStyles();
+        try {
+            contentArea.getChildren().clear();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/LoginHistory.fxml"));
+            Parent view = loader.load();
+            contentArea.getChildren().add(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors du chargement de l'historique des connexions.");
         }
     }
 }

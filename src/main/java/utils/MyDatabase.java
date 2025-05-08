@@ -9,6 +9,7 @@ public class MyDatabase {
 
     final   String USERNAME = "root";
 
+
     final String PWD = "";
 
     Connection con ;
@@ -35,5 +36,14 @@ public class MyDatabase {
 
     public Connection getCon() {
         return con;
+    }
+
+
+    /**
+     * Alias pour getCon() pour une meilleure compatibilité
+     * @return La connexion à la base de données
+     */
+    public Connection getConnection() {
+        return getCon();
     }
 }
